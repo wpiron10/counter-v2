@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Content from "./components/Content";
 
 function App() {
+  const [counter, setCounter] = useState([0]);
+
+  const HandleLess = () => {
+    return setCounter(counter - 1);
+  };
+  const HandleMore = () => {
+    return setCounter(counter + 1);
+  };
+
+  const AddTab = () => {
+    const newTab = [
+      ...setCounter(
+        <Content
+          counter={counter}
+          HandleLess={HandleLess}
+          HandleMore={HandleMore}
+          AddTab={AddTab}
+        />
+      ),
+    ];
+    return newTab;
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="content-box">
+        <Content
+          counter={counter}
+          HandleLess={HandleLess}
+          HandleMore={HandleMore}
+          AddTab={AddTab}
+        />
+      </div>
     </div>
   );
 }
